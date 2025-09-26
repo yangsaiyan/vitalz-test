@@ -79,7 +79,5 @@ export const useUserStore = create<UserStore>((set, get) => ({
         data: get().userList.data.filter((user) => user[key]?.includes(search)),
       },
     });
-
-    console.log(get().searchUserList);
   },
 }));

@@ -66,6 +66,7 @@ export namespace GetUserStatics {
   export interface Req {
     LoginEmail: string;
     DeviceUserID: string;
+    Date: string;
   }
 
   export interface Res {

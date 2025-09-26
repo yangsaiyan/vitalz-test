@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router";
 import Dashboard from "./pages/Dashboard";
 import View from "./pages/View";
 import SimpleLayout from "./layout/SimpleLayout";
+import { Toaster } from "./components/ui/sonner";
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
           }
         />
         <Route
-          path="view"
+          path="view/:LoginEmail/:DeviceUserID/:DataType"
           element={
             <SimpleLayout>
               <View />
@@ -25,6 +26,7 @@ function App() {
           }
         />
       </Routes>
+      <Toaster position="top-right" theme="dark" richColors />
     </div>
   );
 }

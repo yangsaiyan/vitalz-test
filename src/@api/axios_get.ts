@@ -14,7 +14,8 @@ function axiosGet<TParams, TRes>(
       const response = await axios.get(GET_METHOD[method], { params: params });
       resolve(response.data);
     } catch (error) {
-      toast(GET_METHOD_ERROR[method]);
+      console.log(error);
+      toast.error(GET_METHOD_ERROR[method]);
       reject(error);
     } finally {
       setIsLoading(false);
