@@ -9,10 +9,11 @@ import type {
 import { GET_KEY } from "../@api/method_constant";
 
 interface UserStore {
-  userList: GetUserList.User[];
-  userSleepData: GetUserSleepData.UserSleepData[];
-  userScore: GetUserScore.UserScore[];
-  userStatics: GetUserStatics.UserStatics[];
+  userList: GetUserList.Res;
+  userSleepData: GetUserSleepData.Res;
+  userScore: GetUserScore.Res;
+  userStatics: GetUserStatics.Res;
+  searchUserList: GetUserList.Res;
 
   getUserList: () => Promise<GetUserList.Res>;
   getUserSleepData: (
@@ -20,20 +21,24 @@ interface UserStore {
   ) => Promise<GetUserSleepData.Res>;
   getUserScore: (params: GetUserScore.Req) => Promise<GetUserScore.Res>;
   getUserStatics: (params: GetUserStatics.Req) => Promise<GetUserStatics.Res>;
+
+  handleSearchUserList: (search: string, key: keyof GetUserList.User) => void;
 }
 
-export const useUserStore = create<UserStore>((set) => ({
-  userList: [],
-  userSleepData: [],
-  userScore: [],
-  userStatics: [],
+export const useUserStore = create<UserStore>((set, get) => ({
+  userList: { status: 0, data: [] },
+  userSleepData: { status: 0, data: [] },
+  userScore: { status: 0, data: [] },
+  userStatics: { status: 0, data: [] },
+  searchUserList: { status: 0, data: [] },
 
   getUserList: async () => {
     const response = await axiosGet<undefined, GetUserList.Res>(
       GET_KEY.GET_USER_LIST,
       undefined
     );
-    set({ userList: response.UserList });
+    set({ searchUserList: response });
+    set({ userList: response });
     return response;
   },
 
@@ -42,7 +47,7 @@ export const useUserStore = create<UserStore>((set) => ({
       GET_KEY.GET_USER_SLEEP_DATA,
       params
     );
-    set({ userSleepData: response.UserSleepData });
+    set({ userSleepData: response });
     return response;
   },
 
@@ -51,7 +56,7 @@ export const useUserStore = create<UserStore>((set) => ({
       GET_KEY.GET_USER_SCORE,
       params
     );
-    set({ userScore: response.UserScore });
+    set({ userScore: response });
     return response;
   },
 
@@ -60,7 +65,21 @@ export const useUserStore = create<UserStore>((set) => ({
       GET_KEY.GET_USER_STATIC,
       params
     );
-    set({ userStatics: response.UserStatics });
+    set({ userStatics: response });
     return response;
+  },
+
+  handleSearchUserList: (
+    search: string,
+    key: keyof GetUserList.User = "ID"
+  ) => {
+    set({
+      searchUserList: {
+        status: get().userList.status,
+        data: get().userList.data.filter((user) => user[key]?.includes(search)),
+      },
+    });
+
+    console.log(get().searchUserList);
   },
 }));

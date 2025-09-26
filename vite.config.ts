@@ -11,4 +11,13 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  server: {
+    proxy: {
+        '/api': {
+            target: 'https://exam-vitalz-backend-8267f8929b82.herokuapp.com',
+            changeOrigin: true,
+            secure: false,
+        },
+    },
+},
 });

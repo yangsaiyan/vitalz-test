@@ -1,10 +1,16 @@
 export namespace GetUserList {
+  export interface Req {
+    LoginEmail: string;
+    DeviceUserID: string;
+  }
+
   export interface Res {
-    UserList: User[];
+    status: number;
+    data: User[];
   }
 
   export interface User {
-    ID: string;
+    ID: string; 
     LoginEmail: string;
     UserName: string;
     DeviceCompany: string;
@@ -19,7 +25,8 @@ export namespace GetUserSleepData {
   }
 
   export interface Res {
-    UserSleepData: UserSleepData[];
+    status: number;
+    data: UserSleepData[];
   }
 
   export interface UserSleepData {
@@ -42,7 +49,8 @@ export namespace GetUserScore {
   }
 
   export interface Res {
-    UserScore: UserScore[];
+    status: number;
+    data: UserScore[];
   }
 
   export interface UserScore {
@@ -61,7 +69,8 @@ export namespace GetUserStatics {
   }
 
   export interface Res {
-    UserStatics: UserStatics[];
+    status: number;
+    data: UserStatics[];
   }
 
   export interface UserStatics {
