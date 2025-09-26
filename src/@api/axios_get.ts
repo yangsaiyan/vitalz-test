@@ -3,6 +3,10 @@ import { GET_METHOD, GET_METHOD_ERROR } from "./method_constant";
 import { toast } from "sonner";
 import { useGlobalStore } from "../zustand/globalStore";
 
+const api = axios.create({
+  baseURL: import.meta.env.VITE_API_URL || "",
+});
+
 function axiosGet<TParams, TRes>(
   method: keyof typeof GET_METHOD,
   params?: TParams
@@ -11,7 +15,7 @@ function axiosGet<TParams, TRes>(
     const { setIsLoading } = useGlobalStore.getState();
     setIsLoading(true);
     try {
-      const response = await axios.get(GET_METHOD[method], { params: params });
+      const response = await api.get(GET_METHOD[method], { params });
       resolve(response.data);
     } catch (error) {
       console.log(error);
