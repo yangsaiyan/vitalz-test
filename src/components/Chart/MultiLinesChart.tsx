@@ -25,7 +25,7 @@ interface MultiLinesChartProps {
   config: ChartConfig;
 }
 
-export function MultiLinesChart(props: MultiLinesChartProps) {
+export default function MultiLinesChart(props: MultiLinesChartProps) {
   const { data, config, title, description } = props;
 
   const { isLoading } = useGlobalStore();
