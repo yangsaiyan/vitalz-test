@@ -16,7 +16,6 @@ function axiosGet<TParams, TRes>(
       const response = await axios.get(isLocal ? GET_METHOD[method] : import.meta.env.VITE_BASE_URL +  GET_METHOD[method], { params: params });
       resolve(response.data);
     } catch (error) {
-      console.log(error);
       toast.error(GET_METHOD_ERROR[method]);
       reject(error);
     } finally {

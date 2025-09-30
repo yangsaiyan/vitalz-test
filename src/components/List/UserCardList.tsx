@@ -14,7 +14,7 @@ export default function UserCardList(props: UserCardListProps) {
   const { user, keys } = props;
 
   const { isLoading } = useGlobalStore();
-  const pageSize = 3;
+  const pageSize = 5;
   const totalPage = Math.ceil(user.data.length / pageSize);
   const [userList, setUserList] = useState<GetUserList.User[]>(
     user.data.slice(0, pageSize)
