@@ -13,14 +13,7 @@ import { Button } from "../ui/button";
 import { useGlobalStore } from "../../zustand/globalStore";
 import { Skeleton } from "../ui/skeleton";
 import { useNavigate } from "react-router";
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuSeparator,
-} from "../ui/dropdown-menu";
-import { DropdownMenuItem } from "../ui/dropdown-menu";
-import { GET_KEY } from "../../@api/method_constant";
+import ViewUserButton from "../Dropdown/ViewUserButton";
 interface UserTableProps {
   user: GetUserList.Res;
   keys: string[];
@@ -120,39 +113,7 @@ export function UserTable(props: UserTableProps) {
                     </div>
                   </TableCell>
                   <TableCell className="w-[100px] h-full flex justify-end items-center">
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button variant="outline">View</Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent
-                        className="w-fit bg-[#666666] text-white font-bold"
-                        align="start"
-                      >
-                        <DropdownMenuItem
-                          onClick={() =>
-                            handleView(item, GET_KEY.GET_USER_SLEEP_DATA)
-                          }
-                        >
-                          Sleep Data
-                        </DropdownMenuItem>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem
-                          onClick={() =>
-                            handleView(item, GET_KEY.GET_USER_SCORE)
-                          }
-                        >
-                          Score
-                        </DropdownMenuItem>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem
-                          onClick={() =>
-                            handleView(item, GET_KEY.GET_USER_STATIC)
-                          }
-                        >
-                          Statics
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
+                    <ViewUserButton handleView={handleView} user={item} />
                   </TableCell>
                 </TableRow>
               ))

@@ -8,7 +8,7 @@ export const KEY_SELECT_KEYS = [
 
 export const colors = {
   red: "#FF0000",
-  blue: "#0000FF",
+  blue: "#89CFF0",
   green: "#00FF00",
   yellow: "#FFFF00",
   purple: "#800080",
@@ -21,6 +21,8 @@ export const colors = {
   maroon: "#800000",
   navy: "#000080",
   olive: "#808000",
+  gray: "#ADADAD",
+  oceanBlue: "#035A8C",
 };
 
 export const colorList = Object.keys(colors) as (keyof typeof colors)[];
@@ -34,6 +36,6 @@ export const DATA_LABEL = {
     "Light",
     "TotalTimeAsleep",
   ],
-  SCORE_DATA: ["Date", "VitalzScore", "ScoreType"],
+  SCORE_DATA: ["Score", "ScoreType"],
   STATIC_DATA: ["HR", "HRV", "OxygenSaturation"],
 };

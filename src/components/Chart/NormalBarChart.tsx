@@ -15,6 +15,9 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "../../components/ui/chart";
+import { colors } from "../../constant";
+import { useGlobalStore } from "../../zustand/globalStore";
+import { Skeleton } from "../ui/skeleton";
 
 interface ChartBarDefaultProps {
   xAxisdataKey: string;
@@ -37,7 +40,11 @@ export default function NormalBarChart(props: ChartBarDefaultProps) {
     displayData,
   } = props;
 
-  return (
+  const { isLoading } = useGlobalStore();
+
+  return isLoading ? (
+    <Skeleton className="w-4/5 h-1/2" />
+  ) : (
     <Card className="w-4/5 h-fit py-0">
       <CardHeader className="flex flex-col items-stretch border-b !p-0 sm:flex-row">
         <div className="flex flex-1 flex-col justify-center gap-1 px-6 pt-4 pb-3 sm:!py-0">
@@ -108,7 +115,11 @@ export default function NormalBarChart(props: ChartBarDefaultProps) {
               {chartData.map((entry: any, index: number) => {
                 const value = Number(entry?.[barDataKey]);
                 const fill =
-                  value > 60 ? "#22c55e" : value === 0 ? "#ef4444" : "#f59e0b";
+                  value > 60
+                    ? colors["green"]
+                    : value === 0
+                    ? colors["red"]
+                    : colors["yellow"];
                 return <Cell key={`cell-${index}`} fill={fill} />;
               })}
             </Bar>

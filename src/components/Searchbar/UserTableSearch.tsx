@@ -17,8 +17,8 @@ export function UserTableSearch() {
   }
 
   return (
-    <div className="w-full">
-      <div className="mx-10 w-full max-w-[650px] flex flex-row gap-2">
+    <div className="w-full mt-4 flex justify-center">
+      <div className="xl:mx-10 w-full max-w-[650px] flex flex-row gap-2">
         <KeySelect
           value={key}
           onChange={setKey}

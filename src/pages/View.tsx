@@ -51,23 +51,23 @@ export default function View() {
           LightSleep: lightSleep.toFixed(2),
           Awake: awake.toFixed(2),
           TotalTimeAsleep: `${totalHours.toFixed(2)}h`,
-          SleepOnset: `${sleepOnsetString}`,
-          WakeUpTime: `${wakeUpTimeString}`,
+          SleepOnset: sleepOnsetString,
+          WakeUpTime: wakeUpTimeString,
         };
       });
 
       const chartConfig = {
         DeepSleep: {
           label: "Deep Sleep",
-          color: "#035A8C",
+          color: colors["oceanBlue"],
         },
         LightSleep: {
           label: "Light Sleep",
-          color: "#82D3FF",
+          color: colors["blue"],
         },
         Awake: {
           label: "Awake",
-          color: "#ADADAD",
+          color: colors["gray"],
         },
         TotalTimeAsleep: {
           label: "Total Time Asleep",
@@ -80,15 +80,15 @@ export default function View() {
         barList: [
           {
             dataKey: "Awake",
-            color: "#ADADAD",
+            color: colors["gray"],
           },
           {
             dataKey: "LightSleep",
-            color: "#82D3FF",
+            color: colors["blue"],
           },
           {
             dataKey: "DeepSleep",
-            color: "#035A8C",
+            color: colors["oceanBlue"],
           },
           {
             dataKey: "TotalTimeAsleep",
@@ -126,29 +126,24 @@ export default function View() {
         }))
         .reverse();
 
-      const chartConfig = {
-        score: {
-          label: "Score",
-          color: "var(--chart-1)",
-        },
-        scoreType: {
-          label: "Score Type",
-          color: "var(--chart-2)",
-        },
-      } satisfies ChartConfig;
+      const userScoreConfig: ChartConfig = Object.fromEntries(
+        DATA_LABEL.SCORE_DATA.map((item: string, index: number) => [
+          item,
+          {
+            label: item,
+            color: colors[colorList[index]],
+          },
+        ])
+      );
 
       const displayData = [
         {
-          color: "#22c55e",
+          color: colors["green"],
           text: "Recovery >= 60",
         },
         {
-          color: "#f59e0b",
+          color: colors["yellow"],
           text: "Mild Stress <= 59",
-        },
-        {
-          color: "#ef4444",
-          text: "No Score = 0",
         },
       ];
 
@@ -158,7 +153,7 @@ export default function View() {
           barDataKey="score"
           title={GET_KEY.GET_USER_SCORE}
           description={date}
-          chartConfig={chartConfig}
+          chartConfig={userScoreConfig}
           chartData={data}
           displayData={displayData}
         />
